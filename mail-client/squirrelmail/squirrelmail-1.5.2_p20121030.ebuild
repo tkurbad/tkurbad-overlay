@@ -178,7 +178,7 @@ src_install() {
 		"${D}${MY_HTDOCSDIR}/functions/decode" || die
 
 	# Identify the configuration files that this app uses
-	local configs="config/config.php config/config_local.php plugins/retrieveuserdata/config.php"
+	local configs="config/config.php config/config_local.example.php plugins/retrieveuserdata/config.php"
 	use filter && configs="${configs} plugins/amavisnewsql/config.php"
 	use ldap && configs="${configs} plugins/ldapuserdata/config.php"
 	use ssl && configs="${configs} plugins/show_ssl_link/config.php plugins/secure_login/config.php"
