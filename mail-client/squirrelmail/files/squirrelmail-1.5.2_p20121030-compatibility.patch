@@ -1,0 +1,11 @@
+--- squirrelmail.devel/functions/strings.php.orig	2012-04-01 22:09:11.000000000 +0200
++++ squirrelmail.devel/functions/strings.php	2012-10-30 21:31:01.231496016 +0100
+@@ -12,6 +12,8 @@
+  * @package squirrelmail
+  */
+ 
++include_once(SM_PATH . 'plugins/compatibility/functions.php');
++
+ /**
+  * Appends citation markers to the string.
+  * Also appends a trailing space.

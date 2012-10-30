@@ -92,10 +92,10 @@ src_unpack() {
 
 src_prepare() {
 	cd "${S}"
+	epatch "${FILESDIR}/${P}-compatibility.patch
+
 	sed -i "s:'/var/local/squirrelmail/data/':SM_PATH . 'data/':" \
 		config/config.php || die
-
-	epatch "${S}"/plugins/compatibility/patches/compatibility_patch-1.5.0.diff
 
 	cd "${S}/plugins" || die
 	if use ldap; then
