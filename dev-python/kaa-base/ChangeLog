@@ -1,9 +1,0 @@
-# ChangeLog for dev-python/kaa-base
-# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
-# $Header: $
-
-*kaa-base-9999.ebuild (30 Oct 2012)
-
-  30 Oct 2012; Torsten Kurbad <gentoo@tk-webart.de> +kaa-base-9999.ebuild,
-  +metadata.xml:
-  Live ebuild.
