@@ -39,7 +39,7 @@ SRC_URI="http://snapshots.squirrelmail.org/${MY_P}.devel.tar.bz2
 HOMEPAGE="http://www.squirrelmail.org/"
 
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 
 DEPEND=""
 
@@ -92,9 +92,6 @@ src_unpack() {
 
 src_prepare() {
 	cd "${S}"
-
-	# Enable 'compatibility' addon
-	epatch "${FILESDIR}/${P}-compatibility.patch"
 
 	sed -i "s:'/var/local/squirrelmail/data/':SM_PATH . 'data/':" \
 		config/config.php || die
