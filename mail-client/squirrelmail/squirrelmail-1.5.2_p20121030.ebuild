@@ -92,7 +92,9 @@ src_unpack() {
 
 src_prepare() {
 	cd "${S}"
-	epatch "${FILESDIR}/${P}-compatibility.patch
+
+	# Enable 'compatibility' addon
+	epatch "${FILESDIR}/${P}-compatibility.patch"
 
 	sed -i "s:'/var/local/squirrelmail/data/':SM_PATH . 'data/':" \
 		config/config.php || die
