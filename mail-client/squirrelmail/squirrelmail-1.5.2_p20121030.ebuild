@@ -104,6 +104,8 @@ src_prepare() {
 	if use nls; then
 		cp -a "${WORKDIR}"/squirrelmail.locales/locale/* \
 			"${S}"/locale/ || die
+		cp -a "${WORKDIR}"/squirrelmail.locales/help/* \
+			"${S}"/help/ || die
 	fi
 }
 
