@@ -86,11 +86,12 @@ src_unpack() {
 		mv show_ssl_link/config.php.sample show_ssl_link/config.php
 
 	use nls &&
-		cd "${S}" &&
+		cd "${WORKDIR}" &&
 		unpack ${PN}-${LOCALES_VER}.locales.tar.bz2
 }
 
 src_prepare() {
+	cd "${S}"
 	sed -i "s:'/var/local/squirrelmail/data/':SM_PATH . 'data/':" \
 		config/config.php || die
 
@@ -99,17 +100,16 @@ src_prepare() {
 		epatch "${FILESDIR}"/ldapuserdata-${LDAP_USERDATA_VER}-gentoo.patch
 		mv ldapuserdata/config_sample.php ldapuserdata/config.php || die
 	fi
+
+	if use nls; then
+		cp -a "${WORKDIR}"/squirrelmail.locales/locale/* \
+			"${S}"/locale/ || die
+	fi
 }
 
-src_configure() {
-	#we need to have this empty function ...
-	echo "Nothing to configure"
-}
+src_configure() { :; }
 
-src_compile() {
-	#we need to have this empty function ... default compile hangs
-	echo "Nothing to compile"
-}
+src_compile() { :; }
 
 src_install() {
 	webapp_src_preinst
@@ -154,11 +154,6 @@ src_install() {
 			dodoc ${doc}
 			rm -f ${doc}
 		done
-	fi
-
-	if use nls; then
-		insinto locale
-		doins -r squirrelmail.locales/locale/*
 	fi
 
 	if use ssl; then
