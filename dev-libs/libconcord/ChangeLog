@@ -1,0 +1,9 @@
+# ChangeLog for dev-libs/libconcord
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*libconcord-0.24 (30 Oct 2012)
+
+  30 Oct 2012; Torsten Kurbad <gentoo@tk-webart.de> +libconcord-0.24.ebuild,
+  +metadata.xml:
+  initial ebuild
