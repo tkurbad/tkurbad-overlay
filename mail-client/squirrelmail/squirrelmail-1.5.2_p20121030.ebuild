@@ -156,6 +156,11 @@ src_install() {
 		done
 	fi
 
+	if use nls; then
+		insinto locale
+		doins -r squirrelmail.locales/locale/*
+	fi
+
 	if use ssl; then
 		docinto secure_login
 		for doc in plugins/secure_login/INSTALL plugins/secure_login/README; do
