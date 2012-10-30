@@ -1,0 +1,9 @@
+# ChangeLog for dev-python/kaa-display
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*kaa-display-9999.ebuild (30 Oct 2012)
+
+  30 Oct 2012; Torsten Kurbad <gentoo@tk-webart.de> +kaa-display-9999.ebuild,
+  +metadata.xml:
+  Live ebuild.
