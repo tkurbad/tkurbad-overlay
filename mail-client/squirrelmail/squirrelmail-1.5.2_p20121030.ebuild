@@ -22,7 +22,7 @@ LOCALES_VER="${PV/1.5.2_p/}_0202-SVN"
 DECODING_VER=1.2
 
 MY_P=${PN}-${MY_PV}
-S="${WORKDIR}/${PN}.devel/${PN}"
+S="${WORKDIR}/${PN}.devel"
 
 PLUGINS_LOC="http://www.squirrelmail.org/plugins"
 SRC_URI="http://snapshots.squirrelmail.org/${MY_P}.devel.tar.bz2
