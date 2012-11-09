@@ -23,7 +23,7 @@ IUSE=""
 RDEPEND=">=dev-libs/openssl-1.0
 	media-libs/alsa-lib
 	>=media-libs/libsdl-1.2
-	media-libs/portaudio
+	media-libs/portaudio[alsa]
 	>=media-libs/sdl-mixer-1.2
 	>=media-libs/sdl-sound-1.0
 	media-libs/x264
