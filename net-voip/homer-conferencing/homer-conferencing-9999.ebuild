@@ -32,12 +32,15 @@ RDEPEND=">=dev-libs/openssl-1.0
 DEPEND="dev-util/cmake
 	${RDEPEND}"
 
-S="${WORKDIR}/${P}/${PN}"
-
 src_compile() {
+	cd "${S}"/HomerBuild
 	emake all || die "make failed"
 }
 
 src_install() {
-	emake install INSTALL_PREFIX="${DESTDIR}/usr" INSTALL_LIBDIR="${DESTDIR}"/usr/$(get_libdir)
+	cd "${S}"/HomerBuild
+	emake install \
+		INSTALL_PREFIX="${DESTDIR}/usr" \
+		INSTALL_LIBDIR="${DESTDIR}"/usr/$(get_libdir) \
+		|| die "emake install failed"
 }
