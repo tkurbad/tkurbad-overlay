@@ -9,7 +9,7 @@ inherit git-2
 DESCRIPTION="Homer Conferencing (short: Homer) is a free SIP spftphone with advanced audio and video support."
 HOMEPAGE="http://www.homer-conferencing.com"
 
-if [ $PV == *9999* ]; then
+if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="git://github.com/Homer-Conferencing/Homer-Conferencing.git"
 	KEYWORDS=""
 else
