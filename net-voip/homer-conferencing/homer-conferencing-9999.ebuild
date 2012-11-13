@@ -58,7 +58,7 @@ src_install() {
 		|| die "emake install failed"
 
 	# Create .desktop entry
-	newicon -s 128 "${D}"/tmp/${BINARY}.png ${PN}.png
+	newicon "${D}"/tmp/${BINARY}.png ${MY_PN}.png
 	rm -rf "${D}"/tmp
-	make_desktop_entry ${BINARY} ${MY_PN} ${PN} "Network;InstantMessaging;Telephony"
+	make_desktop_entry ${BINARY} ${MY_PN} ${MY_PN} "Network;InstantMessaging;Telephony"
 }
