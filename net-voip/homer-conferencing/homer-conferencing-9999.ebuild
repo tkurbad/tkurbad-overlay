@@ -60,5 +60,5 @@ src_install() {
 	# Create .desktop entry
 	newicon -s 128 "${D}"/tmp/${BINARY}.png ${PN}.png
 	rm -rf "${D}"/tmp
-	make_desktop_entry ${BINARY} ${MY_PN} ${PN} "Application;AudioVideo;Video;Network"
+	make_desktop_entry ${BINARY} ${MY_PN} ${PN} "AudioVideo;Video;Network"
 }
