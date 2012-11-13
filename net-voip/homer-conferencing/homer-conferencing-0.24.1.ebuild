@@ -41,12 +41,18 @@ S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_compile() {
 	cd "${S}"/HomerBuild
-	INSTALL_PREFIX="${D}"/usr INSTALL_LIBDIR="${D}"/usr/$(get_libdir) emake all \
+	INSTALL_PREFIX="${D}"/usr \
+	INSTALL_LIBDIR="${D}"/usr/$(get_libdir) \
+	INSTALL_DATADIR="${D}"/usr/share/homer-conferencing \
+	emake all \
 		|| die "make failed"
 }
 
 src_install() {
 	cd "${S}"/HomerBuild
-	INSTALL_PREFIX="${D}"/usr INSTALL_LIBDIR="${D}"/usr/$(get_libdir) emake install \
+	INSTALL_PREFIX="${D}"/usr \
+	INSTALL_LIBDIR="${D}"/usr/$(get_libdir) \
+	INSTALL_DATADIR="${D}"/usr/share/homer-conferencing \
+	emake install \
 		|| die "emake install failed"
 }
