@@ -41,7 +41,7 @@ S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_compile() {
 	cd "${S}"/HomerBuild
-	INSTALL_PREFIX="${D}"/usr \
+	INSTALL_PREFIX="${D}"/usr/bin \
 	INSTALL_LIBDIR="${D}"/usr/$(get_libdir) \
 	INSTALL_DATADIR="${D}"/usr/share/homer-conferencing \
 	emake all \
@@ -50,7 +50,7 @@ src_compile() {
 
 src_install() {
 	cd "${S}"/HomerBuild
-	INSTALL_PREFIX="${D}"/usr \
+	INSTALL_PREFIX="${D}"/usr/bin \
 	INSTALL_LIBDIR="${D}"/usr/$(get_libdir) \
 	INSTALL_DATADIR="${D}"/usr/share/homer-conferencing \
 	emake install \
