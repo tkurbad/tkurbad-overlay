@@ -6,7 +6,7 @@ EAPI=4
 
 inherit eutils multilib
 
-DESCRIPTION="Homer Conferencing (short: Homer) is a free SIP spftphone with advanced audio and video support."
+DESCRIPTION="Homer Conferencing (short: Homer) is a free SIP softphone with advanced audio and video support."
 HOMEPAGE="http://www.homer-conferencing.com"
 
 MY_PN="Homer-Conferencing"
