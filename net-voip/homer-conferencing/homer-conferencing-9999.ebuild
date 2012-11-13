@@ -41,7 +41,8 @@ S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_compile() {
 	cd "${S}"/HomerBuild
-	emake all || die "make failed"
+	INSTALL_PREFIX="${D}"/usr INSTALL_LIBDIR="${D}"/usr/$(get_libdir) emake all \
+		|| die "make failed"
 }
 
 src_install() {
