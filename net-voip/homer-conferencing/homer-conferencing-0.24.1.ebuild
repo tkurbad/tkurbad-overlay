@@ -44,8 +44,6 @@ src_compile() {
 
 src_install() {
 	cd "${S}"/HomerBuild
-	emake install \
-		INSTALL_PREFIX="${D}"/usr \
-		INSTALL_LIBDIR="${D}"/usr/$(get_libdir) \
+	INSTALL_PREFIX="${D}"/usr INSTALL_LIBDIR="${D}"/usr/$(get_libdir) emake install \
 		|| die "emake install failed"
 }
