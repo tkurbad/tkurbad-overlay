@@ -4,12 +4,13 @@
 
 EAPI=4
 
-inherit multilib
+inherit eutils multilib
 
 DESCRIPTION="Homer Conferencing (short: Homer) is a free SIP spftphone with advanced audio and video support."
 HOMEPAGE="http://www.homer-conferencing.com"
 
 MY_PN="Homer-Conferencing"
+BINARY="Homer"
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-2
@@ -43,7 +44,7 @@ src_compile() {
 	cd "${S}"/HomerBuild
 	INSTALL_PREFIX="${D}"/usr/bin \
 	INSTALL_LIBDIR="${D}"/usr/$(get_libdir) \
-	INSTALL_DATADIR="${D}"/usr/share/homer-conferencing \
+	INSTALL_DATADIR="${D}"/tmp \
 	emake all \
 		|| die "make failed"
 }
@@ -52,7 +53,12 @@ src_install() {
 	cd "${S}"/HomerBuild
 	INSTALL_PREFIX="${D}"/usr/bin \
 	INSTALL_LIBDIR="${D}"/usr/$(get_libdir) \
-	INSTALL_DATADIR="${D}"/usr/share/homer-conferencing \
+	INSTALL_DATADIR="${D}"/tmp \
 	emake install \
 		|| die "emake install failed"
+
+	# Create .desktop entry
+	newicon "${D}"/tmp/${BINARY}.png ${PN}.png
+	rm -rf "${D}"/tmp
+	make_desktop_entry ${BINARY} ${MY_PN} ${PN}.png AudioVideo,Video,Network
 }
