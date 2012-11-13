@@ -4,6 +4,8 @@
 
 EAPI=4
 
+inherit multilib
+
 DESCRIPTION="Homer Conferencing (short: Homer) is a free SIP spftphone with advanced audio and video support."
 HOMEPAGE="http://www.homer-conferencing.com"
 
