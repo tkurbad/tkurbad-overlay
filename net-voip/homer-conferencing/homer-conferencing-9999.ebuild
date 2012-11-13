@@ -58,7 +58,7 @@ src_install() {
 		|| die "emake install failed"
 
 	# Create .desktop entry
-	newicon "${D}"/tmp/${BINARY}.png ${PN}.png
+	newicon -s 128 "${D}"/tmp/${BINARY}.png ${PN}.png
 	rm -rf "${D}"/tmp
-	make_desktop_entry ${BINARY} ${MY_PN} ${PN}.png AudioVideo,Video,Network
+	make_desktop_entry ${BINARY} ${MY_PN} ${PN} "Application;AudioVideo;Video;Network"
 }
