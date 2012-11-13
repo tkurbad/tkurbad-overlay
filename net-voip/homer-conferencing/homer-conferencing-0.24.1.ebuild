@@ -27,38 +27,36 @@ IUSE=""
 
 RDEPEND=">=dev-libs/openssl-1.0
 	media-libs/alsa-lib
-	>=media-libs/libsdl-1.2
+	>=media-libs/libsdl-1.2[X,audio,video,alsa]
 	media-libs/portaudio[alsa]
 	>=media-libs/sdl-mixer-1.2
 	>=media-libs/sdl-sound-1.0
 	media-libs/x264
 	media-video/ffmpeg
 	>=net-libs/sofia-sip-1.12
-	>=x11-libs/qt-gui-4.6"
+	>=x11-libs/qt-core-4.6:4
+	>=x11-libs/qt-gui-4.6:4
+	>=x11-libs/qt-multimedia-4.6:4
+	>=x11-libs/qt-webkit-4.6:4"
 DEPEND="dev-util/cmake
 	${RDEPEND}"
 
 S="${WORKDIR}/${MY_PN}-${PV}"
 
 src_compile() {
-	cd "${S}"/HomerBuild
-	INSTALL_PREFIX="${D}"/usr/bin \
-	INSTALL_LIBDIR="${D}"/usr/$(get_libdir) \
-	INSTALL_DATADIR="${D}"/tmp \
-	emake all \
+	emake -C HomerBuild all \
+		INSTALL_PREFIX=/usr/bin \
+		INSTALL_LIBDIR=/usr/$(get_libdir) \
+		INSTALL_DATADIR=/usr/share/${PN} \
 		|| die "make failed"
 }
 
 src_install() {
-	cd "${S}"/HomerBuild
-	INSTALL_PREFIX="${D}"/usr/bin \
-	INSTALL_LIBDIR="${D}"/usr/$(get_libdir) \
-	INSTALL_DATADIR="${D}"/tmp \
-	emake install \
-		|| die "emake install failed"
+	emake -C HomerBuild install \
+		DESTDIR="${D}" \
+		|| die "make install failed"
 
 	# Create .desktop entry
-	newicon "${D}"/tmp/${BINARY}.png ${MY_PN}.png
-	rm -rf "${D}"/tmp
-	make_desktop_entry ${BINARY} ${MY_PN} ${MY_PN} "Network;InstantMessaging;Telephony"
+	newicon "${BINARY}"/"${BINARY}".png "${MY_PN}".png
+	make_desktop_entry "${BINARY}" "${MY_PN}" "${MY_PN}" "Network;InstantMessaging;Telephony;VideoConference"
 }
