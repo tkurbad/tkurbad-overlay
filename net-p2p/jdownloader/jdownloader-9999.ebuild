@@ -4,20 +4,43 @@
 
 EAPI="4"
 
-inherit subversion
+inherit java-pkg-2 java-ant-2 subversion
 
 DESCRIPTION="Platform Independent Tool to Download Files from One-Click-Hosting Sites"
 HOMEPAGE="http://jdownloader.org"
 
-ESVN_REPO_URI="svn://svn.jdownloader.org/jdownloader
-	svn://svn.appwork.org/utils
-	svn://svn.appwork.org/updclient
-	svn://svn.jdownloader.org/jdownloader/browser"
+# Workaround for single-valued ESVN_REPO_URI
+# (s. src_unpack())
+ESVN_REPO_URI_JD="svn://svn.jdownloader.org/jdownloader/trunk"
+ESVN_REPO_URI_AW_UTILS="svn://svn.appwork.org/utils"
+ESVN_REPO_URI_AW_UPDCLIENT="svn://svn.appwork.org/updclient"
+ESVN_REPO_URI_JD_BROWSER="svn://svn.jdownloader.org/jdownloader/browser"
+
+ESVN_REPO_URI="${ESVN_REPO_URI_JD}"
 
 LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=""
+DEPEND="dev-java/ant
+	>=virtual/jdk-1.5"
 RDEPEND=">=virtual/jre-1.5"
+
+EANT_BUILD_XML="build/build.xml"
+
+src_unpack() {
+	subversion_fetch "${ESVN_REPO_URI}" jdownloader
+	subversion_fetch "${ESVN_REPO_URI_AW_UTILS}" appwork-utils
+	subversion_fetch "${ESVN_REPO_URI_AW_UPDCLIENT}" appwork-updclient
+	subversion_fetch "${ESVN_REPO_URI_JD_BROWSER}" jd-browser
+}
+
+src_compile() {
+	cd "${S}/appwork-utils"
+	java-pkg-2_src_compile
+	cd "${S}/appwork-updclient"
+	java-pkg-2_src_compile
+	cd "${S}/jd-browser"
+	java-pkg-2_src_compile
+}
