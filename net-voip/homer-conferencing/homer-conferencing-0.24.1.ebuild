@@ -35,7 +35,8 @@ RDEPEND=">=dev-libs/openssl-1.0
 	media-video/ffmpeg
 	>=net-libs/sofia-sip-1.12
 	>=x11-libs/qt-core-4.6:4
-	>=x11-libs/qt-gui-4.6:4"
+	>=x11-libs/qt-gui-4.6:4
+	>=x11-libs/qt-webkit-4.6:4"
 DEPEND="dev-util/cmake
 	${RDEPEND}"
 
