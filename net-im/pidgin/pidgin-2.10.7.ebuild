@@ -134,6 +134,9 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-2.10.0-gold.patch"
+	epatch "${FILESDIR}/${PN}-2.10.7-fix-cap.patch"
+
+	epatch_user
 }
 
 src_configure() {
