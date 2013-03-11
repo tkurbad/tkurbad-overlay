@@ -10,7 +10,7 @@ DESCRIPTION="android debug bridge"
 HOMEPAGE="android.googlesource.com"
 
 EGIT_REPO_URI="http://android.googlesource.com/platform/system/core.git"
-EGIT_BRANCH="tools_r21"
+EGIT_BRANCH="jb-mr1.1-release"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -21,7 +21,7 @@ RDEPEND="${DEPEND}"
 
 src_compile(){
 	cd adb
-	cp ${FILESDIR}/Makefile Makefile	
+	cp ${FILESDIR}/Makefile Makefile
 	emake
 }
 
