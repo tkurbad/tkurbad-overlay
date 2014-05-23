@@ -7,3 +7,4 @@ net-misc
 net-p2p
 net-voip
 www-apps
+cross-i686-w64-mingw32

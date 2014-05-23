@@ -10,7 +10,7 @@ DESCRIPTION="android debug bridge"
 HOMEPAGE="android.googlesource.com"
 
 EGIT_REPO_URI="http://android.googlesource.com/platform/system/core.git"
-EGIT_BRANCH="jb-mr1.1-release"
+EGIT_COMMIT="4f247d753a8865cd16292ff0b720b72c28049786"
 
 LICENSE="Apache-2.0"
 SLOT="0"
