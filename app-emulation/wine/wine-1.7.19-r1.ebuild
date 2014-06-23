@@ -322,6 +322,12 @@ src_prepare() {
 			"../${COMPHOLIO_PATCHES}/patches"/*/*.patch #507950
 			"../${COMPHOLIO_PATCHES}/patches/patch-list.patch"
 		)
+		# epatch doesn't support binary patches
+		ebegin "Applying Compholio font patches"
+		"../${COMPHOLIO_PATCHES}/debian/tools/gitapply.sh" \
+			< "${FILESDIR}/wine-1.7.19-missing-fonts-compholio-replacement.patch" \
+			|| die "Failed to apply Compholio font patches"
+                eend
 	fi
 	autotools-utils_src_prepare
 
