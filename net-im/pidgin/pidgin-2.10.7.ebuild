@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-im/pidgin/pidgin-2.10.6.ebuild,v 1.9 2012/12/08 01:25:35 tetromino Exp $
 
-EAPI=4
+EAPI=5
 
 GENTOO_DEPEND_ON_PERL=no
 inherit flag-o-matic eutils toolchain-funcs multilib perl-app gnome2 python
