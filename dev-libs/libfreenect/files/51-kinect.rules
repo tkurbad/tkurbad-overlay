@@ -1,0 +1,14 @@
+# Rules for Kinect ##########################################################
+
+# ATTR{product}=="Xbox NUI Motor"
+SYSFS{idVendor}=="045e", SYSFS{idProduct}=="02b0", MODE="0660", GROUP="video"
+# ATTR{product}=="Xbox NUI Audio"
+SYSFS{idVendor}=="045e", SYSFS{idProduct}=="02ad", MODE="0660", GROUP="video"
+# ATTR{product}=="Xbox NUI Camera"
+SYSFS{idVendor}=="045e", SYSFS{idProduct}=="02ae", MODE="0660", GROUP="video"
+
+# Kinect for Windows
+SYSFS{idVendor}=="045e", SYSFS{idProduct}=="02c2", MODE="0660", GROUP="video"
+SYSFS{idVendor}=="045e", SYSFS{idProduct}=="02be", MODE="0660", GROUP="video"
+SYSFS{idVendor}=="045e", SYSFS{idProduct}=="02bf", MODE="0660", GROUP="video"
+

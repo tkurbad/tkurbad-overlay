@@ -54,7 +54,7 @@ src_install() {
     
     # udev rules
     insinto /lib/udev/rules.d/
-    doins "${S}"/platform/linux/udev/51-kinect.rules
+    doins "${FILESDIR}"/51-kinect.rules
 
     # documentation
     dodoc README.md
