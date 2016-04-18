@@ -19,7 +19,7 @@ SRC_URI="
 LICENSE="LGPL-3 GPL-3 Boost-1.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
-IUSE="doc examples +gmp mpfi qt4"
+IUSE="doc examples +gmp mpfi qt4 +tbb"
 
 RDEPEND="
 	dev-libs/boost
@@ -33,7 +33,8 @@ RDEPEND="
 		dev-qt/qtgui:4
 		dev-qt/qtopengl:4
 	)
-	mpfi? ( sci-libs/mpfi )"
+	mpfi? ( sci-libs/mpfi )
+	tbb? ( dev-cpp/tbb )"
 DEPEND="${RDEPEND}
 	app-arch/xz-utils
 	virtual/pkgconfig"
@@ -58,6 +59,7 @@ src_configure() {
 		$(cmake-utils_use_with gmp GMPXX)
 		$(cmake-utils_use_with qt4 CGAL_Qt4)
 		$(cmake-utils_use_with mpfi)
+		$(cmake-utils_use_with tbb)
 	)
 	cmake-utils_src_configure
 }
