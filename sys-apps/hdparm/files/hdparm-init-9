@@ -53,7 +53,7 @@ scan_nondevfs() {
 		# we replace all dashes by underscores
 		for alias in /dev/disk/by-id/* ; do
 			if [ "${alias}" -ef "${device}" ] ; then
-				eval args_tmp=\$"$(basename "${alias}" | sed 's/-/_/g')"_args
+				eval args_tmp=\$"$(basename "${alias}" | sed -e 's/-/_/g' -e 's/:/_/g')"_args
 				if [ -n "${args_tmp}" ]; then
 					args="${args_tmp}"
 				fi
