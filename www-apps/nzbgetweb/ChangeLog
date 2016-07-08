@@ -1,9 +1,0 @@
-# ChangeLog for www-apps/nzbgetweb
-# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
-# $Header: $
-
-*nzbgetweb-1.5 (30 Oct 2012)
-
-  30 Oct 2012; Torsten Kurbad <gentoo@tk-webart.de> +nzbgetweb-1.5.ebuild,
-  +metadata.xml:
-  initial ebuild

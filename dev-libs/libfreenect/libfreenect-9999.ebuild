@@ -34,6 +34,11 @@ DEPEND="${COMMON_DEP}
          python? ( dev-python/cython )"
 
 
+#src_prepare() {
+#	epatch "${FILESDIR}/${P}-python_executable.patch"
+#	cmake-utils_src_prepare
+#}
+
 src_configure() {
     local mycmakeargs=(
         $(cmake-utils_use_build bindist  REDIST_PACKAGE)
@@ -43,7 +48,7 @@ src_configure() {
         $(cmake-utils_use_build fakenect FAKENECT)
         $(cmake-utils_use_build opencv   CV)
         $(cmake-utils_use_build openni2  OPENNI2_DRIVER)
-        $(cmake-utils_use_build python   PYTHON)
+        $(cmake-utils_use_build python   PYTHON2)
 	-DPYTHON_EXECUTABLE=/usr/bin/python2
     )
     cmake-utils_src_configure
@@ -51,7 +56,7 @@ src_configure() {
 
 src_install() {
     cmake-utils_src_install
-    
+
     # udev rules
     insinto /lib/udev/rules.d/
     doins "${FILESDIR}"/51-kinect.rules
