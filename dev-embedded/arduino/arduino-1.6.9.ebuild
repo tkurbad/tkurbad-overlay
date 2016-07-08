@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-JAVA_PKG_IUSE="doc examples"
+JAVA_PKG_IUSE="doc +examples"
 
 inherit eutils java-pkg-2 java-ant-2
 
