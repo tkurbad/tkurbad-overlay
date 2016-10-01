@@ -12,7 +12,7 @@ DISTUTILS_SRC_TEST="setup.py"
 inherit distutils eutils
 
 if [[ ${PV} != 9999 ]]; then
-	MY_P="FlexGet-${PV/_beta/r}"
+	MY_P="FlexGet-${PV/_beta/.}"
 	SRC_URI="http://download.flexget.com/unstable/${MY_P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 else
@@ -71,4 +71,10 @@ src_prepare() {
 
 	epatch_user
 	distutils_src_prepare
+
+	local future_imports
+	future_imports=$( grep -r 'from __future__ import unicode_literals, division, absolute_import' \
+				"${S}/${PN}"/ui/ | awk -F ':' '{ print $1; }' )
+	sed -e '/^from __future__ import unicode_literals, division, absolute_import$/d' \
+		-i ${future_imports}
 }

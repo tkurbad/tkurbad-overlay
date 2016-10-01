@@ -28,19 +28,23 @@ DEPEND="dev-java/ant
 RDEPEND=">=virtual/jre-1.5"
 
 EANT_BUILD_XML="build/build.xml"
+EANT_BUILD_TARGET="pack_linux"
 
 src_unpack() {
 	subversion_fetch "${ESVN_REPO_URI}" jdownloader
 	subversion_fetch "${ESVN_REPO_URI_AW_UTILS}" appwork-utils
-	subversion_fetch "${ESVN_REPO_URI_AW_UPDCLIENT}" appwork-updclient
-	subversion_fetch "${ESVN_REPO_URI_JD_BROWSER}" jd-browser
+	mv "${S}"/appworkutils/utils jdownloader/AppWorkUtils
+	#subversion_fetch "${ESVN_REPO_URI_AW_UPDCLIENT}" appwork-updclient
+	#subversion_fetch "${ESVN_REPO_URI_JD_BROWSER}" jd-browser
 }
 
 src_compile() {
-	cd "${S}/appwork-utils"
-	java-pkg-2_src_compile
-	cd "${S}/appwork-updclient"
-	java-pkg-2_src_compile
-	cd "${S}/jd-browser"
+	#cd "${S}/appwork-utils"
+	#java-pkg-2_src_compile
+	#cd "${S}/appwork-updclient"
+	#java-pkg-2_src_compile
+	#cd "${S}/jd-browser"
+	#java-pkg-2_src_compile
+	cd "${S}/jdownloader"
 	java-pkg-2_src_compile
 }
