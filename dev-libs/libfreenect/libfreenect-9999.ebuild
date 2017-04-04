@@ -4,7 +4,8 @@
 
 EAPI="5"
 
-inherit cmake-utils git-2 multilib python
+PYTHON_COMPAT=( python2_7 )
+inherit cmake-utils git-2 multilib python-r1
 
 
 DESCRIPTION="Core library for accessing the Microsoft Kinect."
@@ -15,8 +16,6 @@ LICENSE="Apache-2.0 GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE="bindist +c_sync +cpp doc examples fakenect opencv openni2 python"
-
-PYTHON_DEPEND="!bindist? 2"
 
 COMMON_DEP="virtual/libusb:1
             examples? ( media-libs/freeglut
@@ -33,11 +32,6 @@ DEPEND="${COMMON_DEP}
          doc? ( app-doc/doxygen )
          python? ( dev-python/cython )"
 
-
-#src_prepare() {
-#	epatch "${FILESDIR}/${P}-python_executable.patch"
-#	cmake-utils_src_prepare
-#}
 
 src_configure() {
     local mycmakeargs=(
