@@ -1,0 +1,29 @@
+--- pigpio-9999/MakeRemote
++++ pigpio-9999/MakeRemote
+@@ -1,8 +1,4 @@
+ #
+-CC       = gcc
+-SIZE     = size
+-SHLIB    = gcc -shared
+-STRIPLIB = strip --strip-unneeded
+ 
+ CFLAGS += -O3 -Wall -pthread
+ 
+@@ -9,7 +9,7 @@
+ bindir = $(exec_prefix)/bin
+ includedir = $(prefix)/include
+ libdir = $(prefix)/lib
+-mandir = $(prefix)/man
++mandir = $(prefix)/share/man
+ 
+ all: $(ALL) pigpio.py setup.py
+ 
+@@ -48,8 +44,6 @@
+ 	install -m 0644 libpigpiod_if2.so $(DESTDIR)$(libdir)
+ 	install -m 0755 -d                $(DESTDIR)$(bindir)
+ 	install -m 0755 pigs              $(DESTDIR)$(bindir)
+-	python2 setup.py install
+-	python3 setup.py install
+ 	install -m 0755 -d                $(DESTDIR)$(mandir)/man1
+ 	install -m 0644 *.1               $(DESTDIR)$(mandir)/man1
+ 	install -m 0755 -d                $(DESTDIR)$(mandir)/man3

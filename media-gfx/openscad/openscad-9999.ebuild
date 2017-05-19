@@ -30,7 +30,7 @@ CDEPEND="media-gfx/opencsg
 	dev-libs/gmp:0
 	dev-libs/mpfr:0
 	dev-libs/boost:=
-	x11-libs/qscintilla
+	x11-libs/qscintilla[qt4]
 "
 DEPEND="${CDEPEND}"
 RDEPEND="${CDEPEND}"

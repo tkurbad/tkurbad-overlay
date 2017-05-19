@@ -10,7 +10,7 @@ DESCRIPTION="A mesh slicer to generate G-code for fused-filament-fabrication (3D
 HOMEPAGE="http://slic3r.org"
 SRC_URI=""
 EGIT_REPO_URI="https://github.com/alexrj/Slic3r.git"
-EGIT_BRANCH="stable"
+EGIT_BRANCH="master"
 
 LICENSE="AGPL-3 CC-BY-3.0"
 SLOT="0"
@@ -24,6 +24,7 @@ RDEPEND="!=dev-lang/perl-5.16*
 	dev-perl/Devel-Size
 	>=dev-perl/Encode-Locale-1.50.0
 	dev-perl/IO-stringy
+	dev-perl/local-lib
 	>=dev-perl/Math-PlanePath-53.0.0
 	>=dev-perl/Moo-1.3.1
 	dev-perl/XML-SAX-ExpatXS

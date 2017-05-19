@@ -1,0 +1,20 @@
+--- pigpio-44/pigpio.c
++++ pigpio-44/pigpio.c
+@@ -6269,7 +6269,7 @@
+                tp->id,
+               (unsigned)tp->nextTick.tv_sec,
+               (unsigned)tp->nextTick.tv_nsec);
+-            fprintf(stderr, buf);
++            fprintf(stderr, "%s", buf);
+          }
+       }
+ 
+@@ -6360,7 +6360,7 @@
+                   break;
+ 
+                case 5:
+-                  fprintf(outFifo, cmdUsage);
++                  fprintf(outFifo, "%s", cmdUsage);
+                   break;
+ 
+                case 6:

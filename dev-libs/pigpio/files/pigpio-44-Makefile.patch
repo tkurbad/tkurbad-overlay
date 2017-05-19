@@ -1,0 +1,42 @@
+--- pigpio-44/Makefile
++++ pigpio-44/Makefile
+@@ -1,10 +1,4 @@
+ #
+-CC       = gcc
+-AR       = ar
+-RANLIB   = ranlib
+-SIZE     = size
+-SHLIB    = gcc -shared
+-STRIPLIB = strip --strip-unneeded
+ 
+ CFLAGS	+= -O3 -Wall -pthread
+ 
+@@ -32,7 +26,7 @@
+ bindir = $(exec_prefix)/bin
+ includedir = $(prefix)/include
+ libdir = $(prefix)/lib
+-mandir = $(prefix)/man
++mandir = $(prefix)/share/man
+ 
+ all:	$(ALL)
+ 
+@@ -80,16 +74,13 @@
+ 	install -m 0755 libpigpiod_if.so  $(DESTDIR)$(libdir)
+ 	install -m 0755 libpigpiod_if2.so $(DESTDIR)$(libdir)
+ 	install -m 0755 -d                $(DESTDIR)$(bindir)
+-	install -m 0755 -s pig2vcd        $(DESTDIR)$(bindir)
+-	install -m 0755 -s pigpiod        $(DESTDIR)$(bindir)
+-	install -m 0755 -s pigs           $(DESTDIR)$(bindir)
+-	if which python2; then python2 setup.py install; fi
+-	if which python3; then python3 setup.py install; fi
++	install -m 0755 pig2vcd        $(DESTDIR)$(bindir)
++	install -m 0755 pigpiod        $(DESTDIR)$(bindir)
++	install -m 0755 pigs           $(DESTDIR)$(bindir)
+ 	install -m 0755 -d                $(DESTDIR)$(mandir)/man1
+ 	install -m 0644 *.1               $(DESTDIR)$(mandir)/man1
+ 	install -m 0755 -d                $(DESTDIR)$(mandir)/man3
+ 	install -m 0644 *.3               $(DESTDIR)$(mandir)/man3
+-	ldconfig
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)$(includedir)/pigpio.h

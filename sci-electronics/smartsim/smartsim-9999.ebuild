@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit git-2
+inherit git-2 autotools
 
 DESCRIPTION="Digital logic circuit design and simulation package"
 HOMEPAGE="http://www.smartsim.org.uk/ https://github.com/ashleynewson/SmartSim"
@@ -22,6 +22,11 @@ RDEPEND="dev-libs/libxml2:2
 	x11-libs/gtk+:2"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
+
+src_prepare() {
+	default
+	eautoreconf
+}
 
 src_install() {
 	default

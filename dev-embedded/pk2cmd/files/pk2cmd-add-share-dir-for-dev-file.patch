@@ -1,0 +1,25 @@
+--- pk2cmd-9999/pk2cmd/cmd_app.cpp.orig	2017-05-17 15:46:14.454813532 +0200
++++ pk2cmd-9999/pk2cmd/cmd_app.cpp	2017-05-17 15:46:59.444690407 +0200
+@@ -8,7 +8,7 @@
+ // Software must have this entire copyright and disclaimer notice prominently
+ // posted in a location where end users will see it (e.g., installation program,
+ // program headers, About Box, etc.).  To the maximum extent permitted by law,
+-// this Software is distributed “AS IS” and WITHOUT ANY WARRANTY INCLUDING BUT
++// this Software is distributed ?AS IS? and WITHOUT ANY WARRANTY INCLUDING BUT
+ // NOT LIMITED TO ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR
+ // PARTICULAR PURPOSE, or NON-INFRINGEMENT. IN NO EVENT WILL MICROCHIP OR ITS
+ // LICENSORS BE LIABLE FOR ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENTIAL
+@@ -88,7 +88,12 @@
+ 		_tsearchenv_s("PK2DeviceFile.dat", "PATH", tempString);
+ 		if (_tcslen(tempString) < 17)
+ 		{
+-			_tcsncpy_s(tempString, "PK2DeviceFile.dat", 17);
++			// Try /usr/share/pk2 first
++			_tcsncpy_s(tempString, "/usr/share/pk2/PK2DeviceFile.dat", 32);
++
++			if(access(tempString, 0)) 
++				// Well, that didn't work, default to the current directory
++				_tcsncpy_s(tempString, "PK2DeviceFile.dat", 17);
+ 		}
+ 	}
+ 	if (!PicFuncs.ReadDeviceFile(tempString))

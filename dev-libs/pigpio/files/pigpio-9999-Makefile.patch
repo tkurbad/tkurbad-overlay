@@ -1,0 +1,42 @@
+diff -ur pigpio-9999.orig/Makefile pigpio-9999/Makefile
+--- pigpio-9999.orig/Makefile	2016-11-04 10:17:06.305474989 +0100
++++ pigpio-9999/Makefile	2016-11-04 10:19:41.936609643 +0100
+@@ -1,15 +1,6 @@
+ #
+ # Set CROSS_PREFIX to prepend to all compiler tools at once for easier
+ # cross-compilation.
+-CROSS_PREFIX =
+-CC           = $(CROSS_PREFIX)gcc
+-AR           = $(CROSS_PREFIX)ar
+-RANLIB       = $(CROSS_PREFIX)ranlib
+-SIZE         = $(CROSS_PREFIX)size
+-STRIP        = $(CROSS_PREFIX)strip
+-SHLIB        = $(CC) -shared
+-STRIPLIB     = $(STRIP) --strip-unneeded
+-
+ CFLAGS	+= -O3 -Wall -pthread
+ 
+ LIB1     = libpigpio.so
+@@ -36,7 +27,7 @@
+ bindir = $(exec_prefix)/bin
+ includedir = $(prefix)/include
+ libdir = $(prefix)/lib
+-mandir = $(prefix)/man
++mandir = $(prefix)/share/man
+ 
+ all:	$(ALL)
+ 
+@@ -90,13 +81,10 @@
+ 	install -m 0755 pig2vcd           $(DESTDIR)$(bindir)
+ 	install -m 0755 pigpiod           $(DESTDIR)$(bindir)
+ 	install -m 0755 pigs              $(DESTDIR)$(bindir)
+-	if which python2; then python2 setup.py install; fi
+-	if which python3; then python3 setup.py install; fi
+ 	install -m 0755 -d                $(DESTDIR)$(mandir)/man1
+ 	install -m 0644 *.1               $(DESTDIR)$(mandir)/man1
+ 	install -m 0755 -d                $(DESTDIR)$(mandir)/man3
+ 	install -m 0644 *.3               $(DESTDIR)$(mandir)/man3
+-	ldconfig
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)$(includedir)/pigpio.h

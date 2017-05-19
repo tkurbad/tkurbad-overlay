@@ -1,11 +1,12 @@
---- a/lib/Slic3r.pm	2016-12-18 15:24:37.520000000 +0100
-+++ b/lib/Slic3r.pm	2016-12-18 15:25:23.430000000 +0100
+diff -ur slic3r-9999.orig/lib/Slic3r.pm slic3r-9999/lib/Slic3r.pm
+--- slic3r-9999.orig/lib/Slic3r.pm	2017-05-08 09:38:37.478019637 +0200
++++ slic3r-9999/lib/Slic3r.pm	2017-05-08 09:41:32.370470244 +0200
 @@ -42,7 +42,7 @@
  
  use FindBin;
  # Path to the images.
--our $var = sub { decode_path($FindBin::Bin) . "/var/" . $_[0] };
-+our $var = sub { decode_path($FindBin::RealBin) . "/var/" . $_[0] };
- 
- use Moo 1.003001;
- 
+-my $varpath = decode_path($FindBin::Bin) . "/var";
++my $varpath = decode_path($FindBin::RealBin) . "/var";
+ if ($^O eq 'darwin' && !-d $varpath) {
+     $varpath = decode_path($FindBin::Bin) . "/../Resources/var";
+ }
