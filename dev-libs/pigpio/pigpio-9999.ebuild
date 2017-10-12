@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 python3_3 python3_4 python3_5 )
 DISTUTILS_OPTIONAL=1
@@ -22,6 +22,7 @@ DEPEND="${RDEPEND}"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 src_prepare() {
+	default
 	epatch "${FILESDIR}"/${PN}-44-format-security.patch \
 		"${FILESDIR}"/${P}-Makefile.patch \
 		"${FILESDIR}"/${PN}-44-MakeRemote.patch
@@ -53,9 +54,9 @@ src_compile() {
 
 src_install() {
 	if use remote ; then
-		emake -f MakeRemote install prefix="${EROOT}"usr DESTDIR="${D}"
+		emake -f MakeRemote install prefix="${EROOT}"usr libdir="$(get_libdir)" DESTDIR="${D}"
 	else
-		emake install prefix="${EROOT}"usr DESTDIR="${D}"
+		emake install prefix="${EROOT}"usr libdir="$(get_libdir)" DESTDIR="${D}"
 	fi
 
 	use python && distutils-r1_src_install
