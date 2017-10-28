@@ -1,0 +1,25 @@
+From c5edc6cf7b3768ac1409c6cef69ab5980a86596a Mon Sep 17 00:00:00 2001
+From: eumagga0x2a <eumagga0x2a@users.noreply.github.com>
+Date: Thu, 20 Jul 2017 23:54:58 +0200
+Subject: [PATCH] [cmake/x264] Fix build with cmake 3.9.0
+
+---
+ cmake/admCheckX264.cmake | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/admCheckX264.cmake b/cmake/admCheckX264.cmake
+index 10b73336c..4f778af09 100644
+--- a/cmake/admCheckX264.cmake
++++ b/cmake/admCheckX264.cmake
+@@ -20,9 +20,9 @@ MACRO(checkX264)
+ 				ELSE (x264_version LESS 67)
+                                         IF (x264_version GREATER 73)
+ 					        FIND_HEADER_AND_LIB(X264 x264.h x264 x264_encoder_open_${x264_version})
++                                        ELSE (x264_version GREATER 73)
++					        FIND_HEADER_AND_LIB(X264 x264.h x264 x264_encoder_open)
+                                         ENDIF (x264_version GREATER 73)
+-				ELSE (x264_version LESS 67)
+-					FIND_HEADER_AND_LIB(X264 x264.h x264 x264_encoder_open)
+ 				ENDIF (x264_version LESS 67)
+                                 IF(X264_FOUND)
+                                         SET(USE_X264 True CACHE BOOL "")
