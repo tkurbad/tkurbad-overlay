@@ -2,10 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="5"
+EAPI="6"
 
 PYTHON_COMPAT=( python2_7 )
-inherit cmake-utils git-2 multilib python-r1
+inherit cmake-utils git-r3 python-r1
 
 
 DESCRIPTION="Core library for accessing the Microsoft Kinect."
@@ -35,14 +35,14 @@ DEPEND="${COMMON_DEP}
 
 src_configure() {
     local mycmakeargs=(
-        $(cmake-utils_use_build bindist  REDIST_PACKAGE)
-        $(cmake-utils_use_build c_sync   C_SYNC)
-        $(cmake-utils_use_build cpp      CPP)
-        $(cmake-utils_use_build examples EXAMPLES)
-        $(cmake-utils_use_build fakenect FAKENECT)
-        $(cmake-utils_use_build opencv   CV)
-        $(cmake-utils_use_build openni2  OPENNI2_DRIVER)
-        $(cmake-utils_use_build python   PYTHON2)
+	-DBUILD_REDIST_PACKAGE="$(usex bindist)"
+	-DBUILD_C_SYNC="$(usex c_sync)"
+	-DBUILD_CPP="$(usex cpp)"
+	-DBUILD_EXAMPLES="$(usex examples)"
+	-DBUILD_FAKENECT="$(usex fakenect)"
+	-DBUILD_CV="$(usex opencv)"
+	-DBUILD_OPENNI2_DRIVER="$(usex openni2)"
+	-DBUILD_PYTHON2="$(usex python)"
 	-DPYTHON_EXECUTABLE=/usr/bin/python2
     )
     cmake-utils_src_configure
@@ -60,7 +60,7 @@ src_install() {
     if use doc; then
         cd doc
         doxygen || ewarn "doxygen failed"
-        dodoc -r html || ewarn "dodoc failed"
+        #dodoc -r html || ewarn "dodoc failed"
         cd -
     fi
 }
