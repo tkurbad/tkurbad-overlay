@@ -35,7 +35,7 @@ DEPEND="
 	=dev-qt/qtcore-${QT_PV}
 	=dev-qt/qtxml-${QT_PV}
 	=dev-qt/qtxmlpatterns-${QT_PV}
-	sys-devel/clang:5
+	<sys-devel/clang-4
 	numpy? ( dev-python/numpy )
 "
 RDEPEND="${DEPEND}"
