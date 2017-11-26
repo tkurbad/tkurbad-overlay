@@ -1,0 +1,48 @@
+diff -ur audacious-plugins-3.9.orig/src/cdaudio/cdaudio-ng.cc audacious-plugins-3.9/src/cdaudio/cdaudio-ng.cc
+--- audacious-plugins-3.9.orig/src/cdaudio/cdaudio-ng.cc	2017-08-20 03:47:43.000000000 +0200
++++ audacious-plugins-3.9/src/cdaudio/cdaudio-ng.cc	2017-11-26 20:57:29.554579385 +0100
+@@ -33,7 +33,7 @@
+ #include <cdio/sector.h>
+ #include <cdio/cd_types.h>
+ 
+-#if LIBCDIO_VERSION_NUM >= 90
++#if LIBCDIO_VERSION_NUM >= 90 || LIBCDIO_VERSION_NUM == 1
+ #include <cdio/paranoia/cdda.h>
+ #else
+ #include <cdio/cdda.h>
+@@ -540,7 +540,7 @@
+     if (aud_get_bool ("CDDA", "use_cdtext"))
+     {
+         AUDDBG ("getting cd-text information for disc\n");
+-#if LIBCDIO_VERSION_NUM >= 90
++#if LIBCDIO_VERSION_NUM >= 90 || LIBCDIO_VERSION_NUM == 1
+         pcdtext = cdio_get_cdtext (pcdrom_drive->p_cdio);
+         if (pcdtext == nullptr)
+ #else
+@@ -552,7 +552,7 @@
+         }
+         else
+         {
+-#if LIBCDIO_VERSION_NUM >= 90
++#if LIBCDIO_VERSION_NUM >= 90 || LIBCDIO_VERSION_NUM == 1
+             trackinfo[0].performer = String (cdtext_get_const (pcdtext, CDTEXT_FIELD_PERFORMER, 0));
+             trackinfo[0].name = String (cdtext_get_const (pcdtext, CDTEXT_FIELD_TITLE, 0));
+             trackinfo[0].genre = String (cdtext_get_const (pcdtext, CDTEXT_FIELD_GENRE, 0));
+@@ -568,7 +568,7 @@
+     bool cdtext_was_available = false;
+     for (int trackno = firsttrackno; trackno <= lasttrackno; trackno++)
+     {
+-#if LIBCDIO_VERSION_NUM < 90
++#if LIBCDIO_VERSION_NUM < 90 && LIBCDIO_VERSION_NUM != 1
+         if (aud_get_bool ("CDDA", "use_cdtext"))
+         {
+             AUDDBG ("getting cd-text information for track %d\n", trackno);
+@@ -583,7 +583,7 @@
+ 
+         if (pcdtext != nullptr)
+         {
+-#if LIBCDIO_VERSION_NUM >= 90
++#if LIBCDIO_VERSION_NUM >= 90 || LIBCDIO_VERSION_NUM == 1
+             trackinfo[trackno].performer = String (cdtext_get_const (pcdtext, CDTEXT_FIELD_PERFORMER, trackno));
+             trackinfo[trackno].name = String (cdtext_get_const (pcdtext, CDTEXT_FIELD_TITLE, trackno));
+             trackinfo[trackno].genre = String (cdtext_get_const (pcdtext, CDTEXT_FIELD_GENRE, trackno));

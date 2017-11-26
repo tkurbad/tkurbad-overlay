@@ -1,0 +1,35 @@
+diff --git a/work/vboxdrv/r0drv/linux/timer-r0drv-linux.c b/work/vboxdrv/r0drv/linux/timer-r0drv-linux.c
+index 2bb2bfb..3b4a508 100644
+--- work/vboxdrv/r0drv/linux/timer-r0drv-linux.c
++++ work/vboxdrv/r0drv/linux/timer-r0drv-linux.c
+@@ -720,9 +720,9 @@ static enum hrtimer_restart rtTimerLinuxHrCallback(struct hrtimer *pHrTimer)
+  *
+  * @param   ulUser      Address of the sub-timer structure.
+  */
+-static void rtTimerLinuxStdCallback(unsigned long ulUser)
++static void rtTimerLinuxStdCallback(struct timer_list *t)
+ {
+-    PRTTIMERLNXSUBTIMER pSubTimer = (PRTTIMERLNXSUBTIMER)ulUser;
++    PRTTIMERLNXSUBTIMER pSubTimer = from_timer(pSubTimer,t,u.Std.LnxTimer);
+     PRTTIMER            pTimer    = pSubTimer->pParent;
+ 
+     RTTIMERLNX_LOG(("stdcallback %p\n", pTimer));
+@@ -1584,6 +1584,10 @@ RTDECL(int) RTTimerCreateEx(PRTTIMER *ppTimer, uint64_t u64NanoInterval, uint32_
+         else
+ #endif
+         {
++
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0)
++            timer_setup(&pTimer->aSubTimers[iCpu].u.Std.LnxTimer,rtTimerLinuxStdCallback,TIMER_PINNED);
++#else
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
+             init_timer_pinned(&pTimer->aSubTimers[iCpu].u.Std.LnxTimer);
+ #else
+@@ -1591,6 +1595,7 @@ RTDECL(int) RTTimerCreateEx(PRTTIMER *ppTimer, uint64_t u64NanoInterval, uint32_
+ #endif
+             pTimer->aSubTimers[iCpu].u.Std.LnxTimer.data        = (unsigned long)&pTimer->aSubTimers[iCpu];
+             pTimer->aSubTimers[iCpu].u.Std.LnxTimer.function    = rtTimerLinuxStdCallback;
++#endif
+             pTimer->aSubTimers[iCpu].u.Std.LnxTimer.expires     = jiffies;
+             pTimer->aSubTimers[iCpu].u.Std.u64NextTS            = 0;
+         }

@@ -1,0 +1,93 @@
+diff -ruN vboxhost.orig/vboxdrv/linux/SUPDrv-linux.c vboxhost/vboxdrv/linux/SUPDrv-linux.c
+--- vboxhost.orig/vboxdrv/linux/SUPDrv-linux.c	2016-08-22 00:00:00.000000000 +0200
++++ vboxhost/vboxdrv/linux/SUPDrv-linux.c	2017-05-31 19:00:22.887324690 +0200
+@@ -1397,7 +1397,7 @@
+ SUPR0DECL(uint32_t) SUPR0GetKernelFeatures(void)
+ {
+     uint32_t fFlags = 0;
+-#ifdef CONFIG_PAX_KERNEXEC
++#if defined(CONFIG_PAX_KERNEXEC) || LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+     fFlags |= SUPKERNELFEATURES_GDT_READ_ONLY;
+ #endif
+ #if defined(VBOX_STRICT) || defined(VBOX_WITH_EFLAGS_AC_SET_IN_VBOXDRV)
+diff -ruN vboxhost.orig/vboxdrv/r0drv/linux/alloc-r0drv-linux.c vboxhost/vboxdrv/r0drv/linux/alloc-r0drv-linux.c
+--- vboxhost.orig/vboxdrv/r0drv/linux/alloc-r0drv-linux.c	2016-08-22 00:00:00.000000000 +0200
++++ vboxhost/vboxdrv/r0drv/linux/alloc-r0drv-linux.c	2017-05-31 19:03:32.465413475 +0200
+@@ -35,7 +35,10 @@
+ #include <iprt/assert.h>
+ #include <iprt/err.h>
+ #include "r0drv/alloc-r0drv.h"
+-
++#include <linux/kmemleak.h>
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
++#include <asm/set_memory.h>
++#endif
+ 
+ #if (defined(RT_ARCH_AMD64) || defined(DOXYGEN_RUNNING)) && !defined(RTMEMALLOC_EXEC_HEAP)
+ # if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 23)
+diff -ruN vboxhost.orig/vboxdrv/r0drv/linux/memobj-r0drv-linux.c vboxhost/vboxdrv/r0drv/linux/memobj-r0drv-linux.c
+--- vboxhost.orig/vboxdrv/r0drv/linux/memobj-r0drv-linux.c	2017-02-02 16:54:00.000000000 +0100
++++ vboxhost/vboxdrv/r0drv/linux/memobj-r0drv-linux.c	2017-05-31 19:23:05.187059423 +0200
+@@ -899,6 +899,9 @@
+     unsigned long   pfn;
+     struct page    *pPage;
+     pte_t          *pEntry;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
++    p4d_t           p4d;
++#endif
+     union
+     {
+         pgd_t       Global;
+@@ -917,9 +920,18 @@
+     u.Global = *pgd_offset(current->active_mm, ulAddr);
+     if (RT_UNLIKELY(pgd_none(u.Global)))
+         return NULL;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
++    p4d = *p4d_offset(&u.Global, ulAddr);
++    if (RT_UNLIKELY(p4d_none(p4d) || p4d_large(p4d) || !p4d_present(p4d)))
++        return NULL;
++#endif
+ 
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 11)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
++    u.Upper = *pud_offset(&p4d, ulAddr);
++#else
+     u.Upper = *pud_offset(&u.Global, ulAddr);
++#endif
+     if (RT_UNLIKELY(pud_none(u.Upper)))
+         return NULL;
+ # if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 25)
+@@ -1463,13 +1475,23 @@
+ {
+     int rc = -ENOMEM;
+     pgd_t *pgd;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
++    p4d_t *p4d;
++#endif
+ 
+     spin_lock(&mm->page_table_lock);
+ 
+     pgd = pgd_offset(mm, ulAddr);
+     if (!pgd_none(*pgd) && !pgd_bad(*pgd))
+     {
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
++        p4d = p4d_offset(*pgd, ulAddr);
++        if (p4d_none(*p4d))
++            goto exit;
++        pmd_t *pmd = pmd_offset(p4d, ulAddr);
++#else
+         pmd_t *pmd = pmd_offset(pgd, ulAddr);
++#endif
+         if (!pmd_none(*pmd))
+         {
+             pte_t *ptep = pte_offset_map(pmd, ulAddr);
+@@ -1487,6 +1509,9 @@
+         }
+     }
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
++exit:
++#endif
+     spin_unlock(&mm->page_table_lock);
+     return rc;
+ }
