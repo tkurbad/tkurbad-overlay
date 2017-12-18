@@ -45,7 +45,7 @@ src_prepare() {
 	default
 
 	processes="buildCli:avidemux/cli"
-	if use use qt5 ; then
+	if use qt5 ; then
 		processes+=" buildQt4:avidemux/qt4"
 	fi
 
