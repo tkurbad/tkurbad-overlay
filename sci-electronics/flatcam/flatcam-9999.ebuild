@@ -25,7 +25,7 @@ SLOT="0"
 IUSE="+doc"
 
 RDEPEND="
-	>=dev-python/matplotlib-1.3.1[1t5]
+	>=dev-python/matplotlib-1.3.1[qt5]
 	>=dev-python/numpy-1.8
 	dev-python/PyQt5
 	dev-python/simplejson
