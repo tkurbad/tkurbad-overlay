@@ -21,7 +21,8 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
 
-CDEPEND="media-gfx/opencsg
+CDEPEND="dev-util/ccache
+	media-gfx/opencsg
 	sci-mathematics/cgal
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
