@@ -1,0 +1,12 @@
+[Unit]
+Description = LCD Display daemon
+
+[Service]
+Type = forking
+ExecStart = /usr/sbin/LCDd
+Restart = always
+RestartSec = 60
+
+[Install]
+WantedBy = multi-user.target
+
