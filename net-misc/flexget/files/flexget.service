@@ -1,0 +1,13 @@
+[Unit]
+Description=FlexGet daemon
+After=network.target
+
+[Service]
+User=flexget
+Group=flexget
+ExecStart=/usr/bin/flexget --logfile /var/log/flexget/flexget.log --loglevel info -c /etc/flexget/config.yml daemon start
+ExecStop=/usr/bin/flexget daemon stop
+ExecReload=/usr/bin/flexget  daemon reload
+
+[Install]
+WantedBy=multi-user.target

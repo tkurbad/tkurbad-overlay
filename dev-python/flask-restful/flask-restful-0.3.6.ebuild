@@ -16,7 +16,7 @@ KEYWORDS="amd64 x86"
 IUSE="doc examples paging test"
 
 RDEPEND="
-	>=dev-python/aniso8601-0.82[${PYTHON_USEDEP}]
+	=dev-python/aniso8601-1.2.1[${PYTHON_USEDEP}]
 	>=dev-python/flask-0.8[${PYTHON_USEDEP}]
 	>=dev-python/six-1.3.0[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
