@@ -23,9 +23,10 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 src_prepare() {
 	default
-	epatch "${FILESDIR}"/${PN}-44-format-security.patch \
+	epatch \
 		"${FILESDIR}"/${P}-Makefile.patch \
 		"${FILESDIR}"/${PN}-44-MakeRemote.patch
+		# "${FILESDIR}"/${PN}-44-format-security.patch \
 
 	tc-export CC AR RANLIB
 	export SIZE="$(tc-getAR)"
