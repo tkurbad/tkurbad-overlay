@@ -8,6 +8,7 @@ Group=flexget
 ExecStart=/usr/bin/flexget --logfile /var/log/flexget/flexget.log --loglevel info -c /etc/flexget/config.yml daemon start
 ExecStop=/usr/bin/flexget daemon stop
 ExecReload=/usr/bin/flexget  daemon reload
+Environment="LANG=de_DE.UTF-8"
 
 [Install]
 WantedBy=multi-user.target
