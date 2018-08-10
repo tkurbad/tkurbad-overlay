@@ -1,0 +1,16 @@
+diff -ur ymarks-server-9999.orig/src/constants.h ymarks-server-9999/src/constants.h
+--- ymarks-server-9999.orig/src/constants.h	2018-05-21 22:35:56.623271162 +0200
++++ ymarks-server-9999/src/constants.h	2018-05-21 22:37:02.882961737 +0200
+@@ -16,10 +16,10 @@
+ 
+ 
+ /* The port ymarks will bind its server component to: */
+-static const int   SERVERPORT   = 8888;
++static const int   SERVERPORT   = 9999;
+ 
+ /* The folder in which backups will be created (if enabled): */
+-static const char* BACKUPFOLDER = ".";
++static const char* BACKUPFOLDER = "/etc/ymarks";
+ 
+ /* The name of your database file: */
+ static const char* SQLFILE      = "ymarks.db";
