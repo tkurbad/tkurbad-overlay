@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=6
-PYTHON_COMPAT=( python{2_7,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 
 inherit distutils-r1
 
@@ -17,7 +17,7 @@ KEYWORDS="amd64 x86"
 IUSE="doc examples test"
 
 RDEPEND="
-	=dev-python/aniso8601-1.2.1[${PYTHON_USEDEP}]
+	=dev-python/aniso8601-3.0.2[${PYTHON_USEDEP}]
 	>=dev-python/flask-0.8[${PYTHON_USEDEP}]
 	>=dev-python/six-1.3.0[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
