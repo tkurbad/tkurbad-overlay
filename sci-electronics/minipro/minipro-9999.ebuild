@@ -6,8 +6,8 @@ EAPI=6
 inherit bash-completion-r1 git-r3 udev
 
 DESCRIPTION="A free and open TL866XX programmer"
-HOMEPAGE="https://github.com/vdudouyt/minipro"
-EGIT_REPO_URI="https://github.com/vdudouyt/minipro.git"
+HOMEPAGE="https://gitlab.com/DavidGriffith/minipro"
+EGIT_REPO_URI="https://gitlab.com/DavidGriffith/minipro.git"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -18,7 +18,7 @@ RDEPEND="virtual/libusb:1"
 DEPEND="${RDEPEND}"
 
 src_install() {
-	dobin ${PN}{,-query-db,hex}
+	dobin ${PN}{,hex}
 	udev_dorules udev/debian/60-${PN}.rules
 	doman man/${PN}.1
 	dobashcomp bash_completion.d/${PN}
