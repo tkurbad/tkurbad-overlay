@@ -31,7 +31,7 @@ CDEPEND="dev-util/ccache
 	dev-libs/gmp:0
 	dev-libs/mpfr:0
 	dev-libs/boost:=
-	x11-libs/qscintilla[qt5]
+	>=x11-libs/qscintilla-2.10.8
 "
 DEPEND="${CDEPEND}"
 RDEPEND="${CDEPEND}"
