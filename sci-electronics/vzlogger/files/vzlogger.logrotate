@@ -1,0 +1,6 @@
+/var/log/vzlogger.log {
+	rotate 3
+	missingok
+	compress
+	copytruncate
+}
