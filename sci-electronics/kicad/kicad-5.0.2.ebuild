@@ -48,7 +48,7 @@ RDEPEND="${COMMON_DEPEND}
 "
 CHECKREQS_DISK_BUILD="800M"
 
-PATCHES=( "${FILESDIR}"/"${PN}-5.0.0-curl.patch" )
+#PATCHES=( "${FILESDIR}"/"${PN}-5.0.0-curl.patch" )
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
