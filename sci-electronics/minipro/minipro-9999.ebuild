@@ -19,7 +19,7 @@ DEPEND="${RDEPEND}"
 
 src_install() {
 	dobin ${PN}{,hex}
-	udev_dorules udev/debian/60-${PN}.rules
+	udev_dorules udev/rules.d/80-${PN}.rules
 	doman man/${PN}.1
 	dobashcomp bash_completion.d/${PN}
 	bashcomp_alias ${PN} ${PN}-query-db
