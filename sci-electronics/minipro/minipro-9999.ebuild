@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit bash-completion-r1 git-r3 udev
+inherit bash-completion-r1 git-r3 udev eutils
 
 DESCRIPTION="A free and open TL866XX programmer"
 HOMEPAGE="https://gitlab.com/DavidGriffith/minipro"
@@ -17,9 +17,16 @@ IUSE=""
 RDEPEND="virtual/libusb:1"
 DEPEND="${RDEPEND}"
 
+#src_prepare() {
+#	epatch "${FILESDIR}/${P}-firmware-03.2.86.patch"
+#
+#	default
+#}
+
 src_install() {
 	dobin ${PN}{,hex}
-	udev_dorules udev/rules.d/80-${PN}.rules
+	udev_dorules udev/60-${PN}.rules
+	udev_dorules udev/61-${PN}-{plugdev,uaccess}.rules
 	doman man/${PN}.1
 	dobashcomp bash_completion.d/${PN}
 	bashcomp_alias ${PN} ${PN}-query-db

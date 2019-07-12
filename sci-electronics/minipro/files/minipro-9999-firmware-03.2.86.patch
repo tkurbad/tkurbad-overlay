@@ -1,0 +1,19 @@
+Gemeinsame Unterverzeichnisse: minipro-9999.orig/bash_completion.d und minipro-9999/bash_completion.d.
+Gemeinsame Unterverzeichnisse: minipro-9999.orig/debian und minipro-9999/debian.
+Gemeinsame Unterverzeichnisse: minipro-9999.orig/dumpic und minipro-9999/dumpic.
+Gemeinsame Unterverzeichnisse: minipro-9999.orig/.git und minipro-9999/.git.
+Gemeinsame Unterverzeichnisse: minipro-9999.orig/man und minipro-9999/man.
+diff -u minipro-9999.orig/minipro.c minipro-9999/minipro.c
+--- minipro-9999.orig/minipro.c	2019-04-04 13:36:28.336095129 +0200
++++ minipro-9999/minipro.c	2019-04-04 13:38:01.452689135 +0200
+@@ -181,7 +181,7 @@
+ 
+ void minipro_get_system_info(minipro_handle_t *handle, minipro_report_info_t *info)
+ {
+-	uint8_t msg[sizeof(*info)];
++	uint8_t msg[sizeof(*info)*2];
+ 
+ 	memset(info, 0x0, sizeof(*info));
+ 	memset(msg, 0x0, sizeof(msg));
+Gemeinsame Unterverzeichnisse: minipro-9999.orig/public und minipro-9999/public.
+Gemeinsame Unterverzeichnisse: minipro-9999.orig/udev und minipro-9999/udev.
