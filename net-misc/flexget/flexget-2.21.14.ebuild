@@ -28,21 +28,23 @@ IUSE="systemd test transmission"
 RESTRICT="nomirror"
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
-	=dev-python/APScheduler-3.5.0[${PYTHON_USEDEP}]
+	~dev-python/aniso8601-4.0.1[${PYTHON_USEDEP}]
+	=dev-python/APScheduler-3.5.3[${PYTHON_USEDEP}]
+	~dev-python/babelfish-0.5.5[${PYTHON_USEDEP}]
 	=dev-python/beautifulsoup-4.6.3:4[${PYTHON_USEDEP}]
 	=dev-python/certifi-2018.11.29[${PYTHON_USEDEP}]
-	~dev-python/cheroot-6.5.4[${PYTHON_USEDEP}]
-	~dev-python/cherrypy-13.1.0[${PYTHON_USEDEP}]
-	~dev-python/click-7.0[${PYTHON_USEDEP}]
+	~dev-python/chardet-3.0.4[${PYTHON_USEDEP}]
+	~dev-python/cheroot-5.5.0[${PYTHON_USEDEP}]
+	~dev-python/cherrypy-10.2.2[${PYTHON_USEDEP}]
+	~dev-python/click-6.7[${PYTHON_USEDEP}]
 	=dev-python/colorclass-2.2.0[${PYTHON_USEDEP}]
-	=dev-python/feedparser-5.2.1[${PYTHON_USEDEP}]
-	=dev-python/flask-1.0.2[${PYTHON_USEDEP}]
+	~dev-python/feedparser-5.2.1[${PYTHON_USEDEP}]
+	~dev-python/flask-1.0.2[${PYTHON_USEDEP}]
 	=dev-python/flask-compress-1.4.0[${PYTHON_USEDEP}]
 	=dev-python/flask-cors-3.0.2[${PYTHON_USEDEP}]
 	=dev-python/flask-login-0.4.1[${PYTHON_USEDEP}]
-	=dev-python/flask-restful-0.3.6[${PYTHON_USEDEP}]
+	=dev-python/flask-restful-0.3.7[${PYTHON_USEDEP}]
 	=dev-python/flask-restplus-0.10.1[${PYTHON_USEDEP}]
-	=dev-python/functools32-3.2.3[${PYTHON_USEDEP}]
 	~dev-python/future-0.17.0[${PYTHON_USEDEP}]
 	=dev-python/guessit-3.0.3[${PYTHON_USEDEP}]
 	=dev-python/html5lib-1.0.1[${PYTHON_USEDEP}]
@@ -58,7 +60,7 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 	~dev-python/pynzb-0.1.0[${PYTHON_USEDEP}]
 	~dev-python/pyparsing-2.2.0[${PYTHON_USEDEP}]
 	=dev-python/PyRSS2Gen-1.1[${PYTHON_USEDEP}]
-	~dev-python/python-dateutil-2.6.1[${PYTHON_USEDEP}]
+	~dev-python/python-dateutil-2.7.5[${PYTHON_USEDEP}]
 	=dev-python/pytz-2018.9[${PYTHON_USEDEP}]
 	=dev-python/pyyaml-3.13[${PYTHON_USEDEP}]
 	=dev-python/rebulk-0.9.0[${PYTHON_USEDEP}]
@@ -100,15 +102,17 @@ pkg_setup() {
 src_prepare() {
 	distutils-r1_src_prepare
 
-	sed -i -e "s/^aniso8601==1.2.1/aniso8601==3.0.2/" ${S}/requirements.txt || die
+	sed -i -e "s/^aniso8601==1.2.1/aniso8601==4.0.1/" ${S}/requirements.txt || die
+	sed -i -e "s/^apscheduler==3.5.0/apscheduler==3.5.3/" ${S}/requirements.txt || die
 	sed -i -e "s/^beautifulsoup4==4.6.0/beautifulsoup4==4.6.3/" ${S}/requirements.txt || die
 	sed -i -e "s/^certifi==2017.4.17/certifi==2018.11.29/" ${S}/requirements.txt || die
 	sed -i -e "s/^chardet==3.0.3/chardet==3.0.4/" ${S}/requirements.txt || die
-	sed -i -e "s/^cheroot==5.5.0/cheroot==6.5.4/" ${S}/requirements.txt || die
-	sed -i -e "s/^cherrypy==10.2.2/cherrypy==13.1.0/" ${S}/requirements.txt || die
-	sed -i -e "s/^click==6.7/click==7.0/" ${S}/requirements.txt || die
+	#sed -i -e "s/^cheroot==5.5.0/cheroot==6.0.0/" ${S}/requirements.txt || die
+	#sed -i -e "s/^cherrypy==10.2.2/cherrypy==13.1.0/" ${S}/requirements.txt || die
+	#sed -i -e "s/^click==6.7/click==7.0/" ${S}/requirements.txt || die
 	sed -i -e "s/^flask==0.12.2/flask==1.0.2/" ${S}/requirements.txt || die
 	sed -i -e "s/^flask-login==0.4.0/flask-login==0.4.1/" ${S}/requirements.txt || die
+	sed -i -e "s/^flask-restful==0.3.6/flask-restful==0.3.7/" ${S}/requirements.txt || die
 	sed -i -e "s/^future==0.16.0/future==0.17.0/" ${S}/requirements.txt || die
 	sed -i -e "s/^html5lib==0.999999999/html5lib==1.0.1/" ${S}/requirements.txt || die
 	sed -i -e "s/^idna==2.5/idna==2.8/" ${S}/requirements.txt || die
@@ -118,9 +122,9 @@ src_prepare() {
 	sed -i -e "s/^portend==1.8/portend==2.2/" ${S}/requirements.txt || die
 	sed -i -e "s/^plumbum==1.6.3/plumbum==1.6.4/" ${S}/requirements.txt || die
 	#sed -i -e "s/^progressbar==2.5/progressbar==2.3/" ${S}/requirements.txt || die
-	#sed -i -e "s/^python-dateutil==2.6.1/python-dateutil==2.7.5/" ${S}/requirements.txt || die
+	sed -i -e "s/^python-dateutil==2.6.1/python-dateutil==2.7.5/" ${S}/requirements.txt || die
 	sed -i -e "s/^pytz==2017.2/pytz==2018.9/" ${S}/requirements.txt || die
-	sed -i -e "s/^pyparsing==2.2.0/pyparsing==2.3.1/" ${S}/requirements.txt || die
+	#sed -i -e "s/^pyparsing==2.2.0/pyparsing==2.3.1/" ${S}/requirements.txt || die
 	#sed -i -e "s/^pyyaml==3.13/pyyaml==5.1/" ${S}/requirements.txt || die
 	sed -i -e "s/^requests==2.20.1/requests==2.21.0/" ${S}/requirements.txt || die
 	sed -i -e "s/^rpyc==4.0.1/rpyc==4.0.2/" ${S}/requirements.txt || die
