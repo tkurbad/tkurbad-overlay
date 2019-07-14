@@ -36,6 +36,10 @@ src_prepare() {
 
 	cmake-utils_src_prepare
 
+	sed -e "s:Wno-system-headers:Wno-system-headers -Wno-error=deprecated-copy:" \
+		-i ${S}/modules/CompilerFlags.cmake \
+	|| die "sed failed"
+
 	sed -e "s@ExecStart=/usr/local/bin/vzlogger@ExecStart=/usr/bin/vzlogger@" \
 		-i ${S}/etc/vzlogger.service \
 	|| die "sed failed"

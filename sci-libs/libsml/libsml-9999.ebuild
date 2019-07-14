@@ -3,7 +3,9 @@
 
 EAPI=6
 
-inherit eutils
+MULTILIB_COMPAT=( abi_x86_64 )
+
+inherit multilib-build eutils
 
 if [[ ${PV} == "9999" ]]; then
         EGIT_REPO_URI="https://github.com/volkszaehler/${PN}"
@@ -11,7 +13,7 @@ if [[ ${PV} == "9999" ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="https://github.com/volkszaehler/${PN}/archive/${PV} -> ${P}"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64"
 fi
 
 DESCRIPTION="A library which implements the Smart Message Language (SML)"
@@ -27,8 +29,15 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
+EMULTILIB_PKG="true"
+
 src_prepare() {
-	sed -e "s@prefix = /usr/local@prefix = /usr@" \
+	local lib64="$(get_libdir)"
+	sed -e "s:prefix = /usr/local:prefix = /usr:" \
+		-i ${S}/sml/Makefile \
+	|| die "sed failed"
+
+	sed -e "s:libdir = \${exec_prefix}/lib:libdir = \$\{exec_prefix\}/${lib64}:" \
 		-i ${S}/sml/Makefile \
 	|| die "sed failed"
 
@@ -53,7 +62,7 @@ src_compile() {
 src_install() {
 	DESTDIR="${D}" emake -C sml install
 	use examples && DESTDIR="${D}" emake -C examples install
-	insinto /usr/lib/pkgconfig
+	insinto /usr/$(get_libdir)/pkgconfig
 	doins ${S}/sml.pc
 }
 
