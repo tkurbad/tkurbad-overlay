@@ -164,6 +164,8 @@ src_prepare() {
 	# https://bugs.webkit.org/show_bug.cgi?id=159124#c1
 	eapply "${FILESDIR}"/${PN}-2.4.9-gcc-6.patch
 
+	eapply "${FILESDIR}"/${P}-U16_NEXT.patch
+
 	AT_M4DIR=Source/autotools eautoreconf
 
 	gnome2_src_prepare
