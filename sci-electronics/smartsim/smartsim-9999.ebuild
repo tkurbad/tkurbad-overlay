@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=6
 
-inherit git-2 autotools
+inherit git-r3 autotools
 
 DESCRIPTION="Digital logic circuit design and simulation package"
 HOMEPAGE="http://www.smartsim.org.uk/ https://github.com/ashleynewson/SmartSim"
