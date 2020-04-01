@@ -22,8 +22,9 @@ SLOT="0"
 IUSE="+logrotate +microhttpd ocr oms +sml systemd"
 
 RDEPEND="dev-libs/json-c
+	app-misc/mosquitto
 	logrotate? ( app-admin/logrotate )
-	microhttpd? ( net-libs/libmicrohttpd )
+	microhttpd? ( >=net-libs/libmicrohttpd-0.9 )
 	ocr? ( media-libs/leptonica app-text/tesseract )
 	oms? ( sci-libs/libmbus )
 	sml? ( sci-libs/libsml )
@@ -32,17 +33,22 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
+	#epatch "${FILESDIR}"/"${P}"-curl_tls1_2.patch
+
 	default
 
 	cmake-utils_src_prepare
 
+	sed -e "s/  share\/doc\/vzlogger-\${VZLOGGER_MAJOR_VERSION}-\${VZLOGGER_MINOR_VERSION}$/  share\/doc\/vzlogger-${PV}/" \
+		-i ${S}/CMakeLists.txt \
+	|| die "sed failed"
 	sed -e "s:Wno-system-headers:Wno-system-headers -Wno-error=deprecated-copy:" \
 		-i ${S}/modules/CompilerFlags.cmake \
 	|| die "sed failed"
 
-	sed -e "s@ExecStart=/usr/local/bin/vzlogger@ExecStart=/usr/bin/vzlogger@" \
-		-i ${S}/etc/vzlogger.service \
-	|| die "sed failed"
+	#sed -e "s@ExecStart=/usr/local/bin/vzlogger@ExecStart=/usr/bin/vzlogger@" \
+	#	-i ${S}/etc/vzlogger.service \
+	#|| die "sed failed"
 }
 
 src_configure() {
@@ -53,6 +59,9 @@ src_configure() {
 		-DENABLE_OCR_TESSERACT=$(usex ocr)
 		-DENABLE_OMS=$(usex oms)
 		-DENABLE_SML=$(usex sml)
+		-DJSON_HOME=/usr
+		-DMICROHTTPD_HOME=/usr
+		-DSML_HOME=/usr
 	)
 	cmake-utils_src_configure
 }
@@ -68,5 +77,5 @@ src_install() {
 		newins ${FILESDIR}/vzlogger.logrotate vzlogger
 	fi
 
-	use systemd && systemd_dounit ${S}/etc/vzlogger.service
+	use systemd && systemd_dounit ${FILESDIR}/vzlogger.service
 }

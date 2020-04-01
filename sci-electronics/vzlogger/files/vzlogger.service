@@ -1,0 +1,14 @@
+[Unit]
+Description=vzlogger
+After=syslog.target network.target
+After=mysql.service ntp.service
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/vzlogger -c /etc/vzlogger.conf
+ExecReload=
+StandardOutput=journal
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+diff -ur vzlogger-9999.orig/src/api/Volkszaehler.cpp vzlogger-9999/src/api/Volkszaehler.cpp
+--- vzlogger-9999.orig/src/api/Volkszaehler.cpp	2020-03-31 17:55:49.961228856 +0200
++++ vzlogger-9999/src/api/Volkszaehler.cpp	2020-03-31 18:01:16.903767753 +0200
+@@ -122,6 +122,7 @@
+ 	curl_easy_setopt(_api.curl, CURLOPT_URL, _url.c_str());
+ 	curl_easy_setopt(_api.curl, CURLOPT_HTTPHEADER, _api.headers);
+ 	curl_easy_setopt(_api.curl, CURLOPT_VERBOSE, options.verbosity());
++	curl_easy_setopt(_api.curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+ 	curl_easy_setopt(_api.curl, CURLOPT_DEBUGFUNCTION, curl_custom_debug_callback);
+ 	curl_easy_setopt(_api.curl, CURLOPT_DEBUGDATA, channel().get());
+ 
