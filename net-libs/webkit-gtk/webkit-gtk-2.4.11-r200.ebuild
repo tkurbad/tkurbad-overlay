@@ -3,7 +3,7 @@
 
 EAPI="6"
 PYTHON_COMPAT=( python2_7 )
-USE_RUBY="ruby20 ruby21 ruby22 ruby23 ruby24"
+USE_RUBY="ruby20 ruby21 ruby22 ruby23 ruby24 ruby25 ruby26 ruby27"
 
 inherit autotools check-reqs flag-o-matic gnome2 pax-utils python-any-r1 ruby-single toolchain-funcs versionator virtualx
 
@@ -199,7 +199,15 @@ src_configure() {
 
 	local ruby_interpreter=""
 
-	if has_version "virtual/rubygems[ruby_targets_ruby23]"; then
+	if has_version "virtual/rubygems[ruby_targets_ruby27]"; then
+		ruby_interpreter="RUBY=$(type -P ruby27)"
+	elif has_version "virtual/rubygems[ruby_targets_ruby26]"; then
+		ruby_interpreter="RUBY=$(type -P ruby26)"
+	elif has_version "virtual/rubygems[ruby_targets_ruby25]"; then
+		ruby_interpreter="RUBY=$(type -P ruby25)"
+	elif has_version "virtual/rubygems[ruby_targets_ruby24]"; then
+		ruby_interpreter="RUBY=$(type -P ruby24)"
+	elif has_version "virtual/rubygems[ruby_targets_ruby23]"; then
 		ruby_interpreter="RUBY=$(type -P ruby23)"
 	elif has_version "virtual/rubygems[ruby_targets_ruby22]"; then
 		ruby_interpreter="RUBY=$(type -P ruby22)"
