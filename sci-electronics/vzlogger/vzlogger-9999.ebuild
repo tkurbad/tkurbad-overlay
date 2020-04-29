@@ -19,12 +19,16 @@ HOMEPAGE="https://github.com/volkszaehler/vzlogger"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="+logrotate +microhttpd ocr oms +sml systemd"
+IUSE="+logrotate +microhttpd mqtt ocr oms +sml systemd"
 
-RDEPEND="dev-libs/json-c
-	app-misc/mosquitto
+RDEPEND="
+	dev-libs/cyrus-sasl
+	dev-libs/json-c
+	dev-libs/libgcrypt
+	net-libs/gnutls
 	logrotate? ( app-admin/logrotate )
 	microhttpd? ( >=net-libs/libmicrohttpd-0.9 )
+	mqtt? ( app-misc/mosquitto )
 	ocr? ( media-libs/leptonica app-text/tesseract )
 	oms? ( sci-libs/libmbus )
 	sml? ( sci-libs/libsml )
@@ -55,6 +59,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DBUILD_TEST=off
 		-DENABLE_LOCAL=$(usex microhttpd)
+		-DENABLE_MQTT=$(usex mqtt)
 		-DENABLE_OCR=$(usex ocr)
 		-DENABLE_OCR_TESSERACT=$(usex ocr)
 		-DENABLE_OMS=$(usex oms)
