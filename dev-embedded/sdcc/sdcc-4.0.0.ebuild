@@ -131,9 +131,6 @@ src_configure() {
 		\
 		--disable-doc \
 		--without-ccache
-
-		$(use pic14) && sed -i -e "s/ARCH = .+/ARCH = 16F1826/" \
-			"${S}"/device/lib/pic14/libsdcc/regular/Makefile
 }
 
 src_install() {
