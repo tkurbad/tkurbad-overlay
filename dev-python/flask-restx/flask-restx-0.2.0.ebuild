@@ -2,14 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
-PYTHON_COMPAT=( python{2_7,3_6,3_7} pypy{,3} )
+EAPI=7
+PYTHON_COMPAT=( python3_{6,7,8,9} pypy{,3} )
 
 inherit distutils-r1
 
 DESCRIPTION="Fully featured framework for fast, easy and documented API development with Flask"
-HOMEPAGE="http://flask-restplus.readthedocs.org/ https://github.com/noirbizarre/flask-restplus/"
-SRC_URI="https://github.com/noirbizarre/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/python-restx/flask-restx"
+SRC_URI="https://github.com/python-restx/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -22,10 +22,13 @@ RDEPEND="
 	>=dev-python/six-1.3.0[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
 	dev-python/jsonschema[${PYTHON_USEDEP}]
-	>=dev-python/flask-restful-0.3.3[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}
-	dev-python/sphinx[${PYTHON_USEDEP}]
+	doc? (
+		~dev-python/alabaster-0.7.12[${PYTHON_USEDEP}]
+		dev-python/sphinx[${PYTHON_USEDEP}]
+		~dev-python/sphinx-issues-1.2.0[${PYTHON_USEDEP}]
+	)
 	test? (
 		dev-python/nose[${PYTHON_USEDEP}]
 		dev-python/rednose[${PYTHON_USEDEP}]

@@ -38,6 +38,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	#epatch "${FILESDIR}"/"${P}"-curl_tls1_2.patch
+	epatch "${FILESDIR}"/"${P}"-cpp-true_false.patch
 
 	default
 
@@ -46,7 +47,7 @@ src_prepare() {
 	sed -e "s/  share\/doc\/vzlogger-\${VZLOGGER_MAJOR_VERSION}-\${VZLOGGER_MINOR_VERSION}$/  share\/doc\/vzlogger-${PV}/" \
 		-i ${S}/CMakeLists.txt \
 	|| die "sed failed"
-	sed -e "s:Wno-system-headers:Wno-system-headers -Wno-error=deprecated-copy:" \
+	sed -e "s:Wno-system-headers:Wno-system-headers -Wno-error -fpermissive:" \
 		-i ${S}/modules/CompilerFlags.cmake \
 	|| die "sed failed"
 
