@@ -1,30 +1,29 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
 inherit eutils git-r3 perl-module
 
 DESCRIPTION="A mesh slicer to generate G-code for fused-filament-fabrication (3D printers)"
-HOMEPAGE="http://slic3r.org"
+HOMEPAGE="https://slic3r.org"
 SRC_URI=""
-EGIT_REPO_URI="https://github.com/alexrj/Slic3r.git"
-EGIT_BRANCH="master"
+EGIT_REPO_URI="https://github.com/Slic3r/Slic3r.git"
 
 LICENSE="AGPL-3 CC-BY-3.0"
 SLOT="0"
 KEYWORDS=""
 IUSE="+gui test"
+RESTRICT="!test? ( test )"
 
 # check Build.PL for dependencies
 RDEPEND="!=dev-lang/perl-5.16*
 	>=dev-libs/boost-1.55[threads]
 	dev-perl/Class-XSAccessor
+	dev-perl/Devel-CheckLib
 	dev-perl/Devel-Size
 	>=dev-perl/Encode-Locale-1.50.0
 	dev-perl/IO-stringy
-	dev-perl/local-lib
 	>=dev-perl/Math-PlanePath-53.0.0
 	>=dev-perl/Moo-1.3.1
 	dev-perl/XML-SAX-ExpatXS
@@ -74,7 +73,8 @@ src_unpack() {
 
 src_prepare() {
 	pushd "${WORKDIR}/slic3r-${PV}" || die
-	eapply "${FILESDIR}/${P}-adjust_var_path.patch"
+	sed -i lib/Slic3r.pm -e "s@FindBin::Bin@FindBin::RealBin@g" || die
+	eapply "${FILESDIR}"/${P}-no-locallib.patch
 	eapply_user
 	popd || die
 }
