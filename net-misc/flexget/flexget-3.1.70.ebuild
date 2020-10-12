@@ -73,11 +73,11 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 	~dev-python/rpyc-4.1.4[${PYTHON_USEDEP}]
 	~dev-python/six-1.15.0[${PYTHON_USEDEP}]
 	=dev-python/soupsieve-1.9.5[${PYTHON_USEDEP}]
-	=dev-python/sqlalchemy-1.3.11[${PYTHON_USEDEP}]
+	~dev-python/sqlalchemy-1.3.17[${PYTHON_USEDEP}]
 	~dev-python/tempora-1.14.1[${PYTHON_USEDEP}]
 	=dev-python/terminaltables-3.1.0[${PYTHON_USEDEP}]
 	~dev-python/tzlocal-2.1[${PYTHON_USEDEP}]
-	=dev-python/urllib3-1.25.10[${PYTHON_USEDEP}]
+	~dev-python/urllib3-1.25.10[${PYTHON_USEDEP}]
 	~dev-python/webencodings-0.5.1[${PYTHON_USEDEP}]
 	~dev-python/werkzeug-0.16.1[${PYTHON_USEDEP}]
 	=dev-python/zc-lockfile-2.0[${PYTHON_USEDEP}]
@@ -140,7 +140,7 @@ src_prepare() {
 	sed -i -e "s/^requests==2.21.0/requests==2.24.0/" ${S}/requirements.txt || die
 	sed -i -e "s/^rpyc==4.0.1/rpyc==4.1.4/" ${S}/requirements.txt || die
 	sed -i -e "s/^six==1.13.0/six==1.15.0/" ${S}/requirements.txt || die
-	#sed -i -e "s/^sqlalchemy==1.3.3/sqlalchemy==1.3.4/" ${S}/requirements.txt || die
+	sed -i -e "s/^sqlalchemy==1.3.11/sqlalchemy==1.3.17/" ${S}/requirements.txt || die
 	sed -i -e "s/^tempora==1.8/tempora==1.14.1/" ${S}/requirements.txt || die
 	sed -i -e "s/^tzlocal==1.4/tzlocal==2.1/" ${S}/requirements.txt || die
 	sed -i -e "s/^urllib3==1.24.2/urllib3==1.25.10/" ${S}/requirements.txt || die

@@ -4,8 +4,9 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{3,4,5,6} )
+PYTHON_COMPAT=( python3_{7,8,9} pypy3 )
 DISTUTILS_OPTIONAL=1
+DISTUTILS_USE_SETUPTOOLS=no
 inherit eutils git-r3 toolchain-funcs distutils-r1
 
 DESCRIPTION="C library for the Raspberry allowing control of general purpose input outputs"
