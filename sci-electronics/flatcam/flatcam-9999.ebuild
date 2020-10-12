@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
-PYTHON_COMPAT=( python2_7 )
+EAPI=7
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit distutils-r1 git-r3 gnome2-utils
 
@@ -25,11 +25,11 @@ SLOT="0"
 IUSE="+doc"
 
 RDEPEND="
-	>=dev-python/matplotlib-1.3.1[qt5]
-	>=dev-python/numpy-1.8
-	dev-python/PyQt5
-	dev-python/simplejson
-	dev-python/svg_path
+	>=dev-python/matplotlib-1.3.1[${PYTHON_USEDEP},qt5]
+	>=dev-python/numpy-1.8[${PYTHON_USEDEP}]
+	dev-python/PyQt5[${PYTHON_USEDEP}]
+	dev-python/simplejson[${PYTHON_USEDEP}]
+	dev-python/svg-path[${PYTHON_USEDEP}]
 	sci-libs/Rtree
 	sci-libs/scipy
 	>=sci-libs/Shapely-1.3
