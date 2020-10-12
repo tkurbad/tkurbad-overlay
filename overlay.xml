@@ -4,13 +4,13 @@
   <repo quality="experimental" status="unofficial">
     <name>tkurbad</name>
     <description>ebuilds for various purposes</description>
-    <homepage>https://github.com/tkurbad/tkurbad-overlay</homepage>
+    <homepage>https://git.tk-webart.de:7443/Linux/tkurbad-overlay</homepage>
     <owner>
       <email>gentoo@tk-webart.de</email>
       <name>Torsten Kurbad</name>
     </owner>
-    <source type="git">https://github.com/tkurbad/tkurbad-overlay.git</source>
-    <source type="git">git://github.com/tkurbad/tkurbad-overlay.git</source>
-    <feed>https://github.com/feeds/tkurbad/commits/tkurbad-overlay/master</feed>
+    <source type="git">https://git.tk-webart.de:7443/Linux/tkurbad-overlay.git</source>
+    <source type="git">git://git.tk-webart.de/Linux/tkurbad-overlay.git</source>
+    <feed>https://git.tk-webart.de:7443/Amiga/HDFloppy-PIC/commits/branch/master</feed>
   </repo>
 </repositories>
